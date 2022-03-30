@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import ForestContainer from "./components/ForestContainer";
+import ButtonAppBar from "./components/AppsBar";
+import WorkerContainer from "./components/WorkerContainer";
+import SensorContainer from "./components/SensorContainer";
+import Box from "@mui/material/Box";
+import CoverageContainer from "./components/CoverageContainer";
+import StateContainer from "./components/StateContainer";
+import ReportContainer from "./components/ReportContainer";
 
 function App() {
+  const [formType, setFormType] = useState("");
+
+  const getType = (type) => {
+    console.log(type);
+    setFormType(type);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ButtonAppBar sendData={getType}></ButtonAppBar>
+      {formType === "Forest" ? <ForestContainer></ForestContainer> : null}
+      {formType === "Worker" ? <WorkerContainer></WorkerContainer> : null}
+      {formType === "Sensor" ? <SensorContainer></SensorContainer> : null}
+      {formType === "Coverage" ? <CoverageContainer></CoverageContainer> : null}
+      {formType === "State" ? <StateContainer></StateContainer> : null}
+      {formType === "Report" ? <ReportContainer></ReportContainer> : null}
+      {formType === "" ? (
+        <Box
+          component="img"
+          className="image"
+          alt="The house from the offer."
+          src="/forest1.jpg"
+        />
+      ) : null}
+      {formType === "" ? (
+        <div class="title1">US Forest Prototype System</div>
+      ) : null}
     </div>
   );
 }
